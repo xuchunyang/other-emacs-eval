@@ -49,12 +49,22 @@ absolute file name) of an Emacs."
 
 ;;;###autoload
 (defun other-emacs-eval-last-sexp (emacs &optional insert-value)
-  "Evaluate sexp before point with EMACS and print value in the echo area.
-With prefix argument or INSERT-VALUE is non-nil, insert value at point."
+  "Evaluate sexp before point with EMACS; print value in the echo area.
+With prefix argument or INSERT-VALUE is non-nil, print value into
+current buffer."
   (interactive (list (other-emacs-eval-read-emacs)
                      current-prefix-arg))
   (let ((value (other-emacs-eval (elisp--preceding-sexp) emacs)))
     (prin1 value (if insert-value (current-buffer) t))))
+
+;;;###autoload
+(defun other-emacs-eval-print-last-sexp (emacs)
+  "Evaluate sexp before point with EMACS; print value into current buffer."
+  (interactive (list (other-emacs-eval-read-emacs)))
+  (let ((standard-output (current-buffer)))
+    (terpri)
+    (other-emacs-eval-last-sexp emacs t)
+    (terpri)))
 
 (provide 'other-emacs-eval)
 ;;; other-emacs-eval.el ends here
