@@ -13,7 +13,7 @@ compile: async.el
 	$(EMACS) -Q --batch -l async.el -f batch-byte-compile other-emacs-eval.el
 
 async.el:
-	@printf "* Downloading ghub.el..."
+	@printf "* Downloading $@...\n"
 	@curl -O https://raw.githubusercontent.com/jwiegley/emacs-async/master/async.el
 
 xuchunyang:
