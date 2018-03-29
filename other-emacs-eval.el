@@ -58,6 +58,13 @@ absolute file name) of an Emacs."
   (read-shell-command "Emacs: " "emacs"))
 
 ;;;###autoload
+(defun other-emacs-eval-expression (emacs exp)
+  "Evaluate EXP with EMACS; print value in the echo area."
+  (interactive (list (other-emacs-eval-read-emacs)
+                     (read--expression "Eval: ")))
+  (prin1 (other-emacs-eval exp emacs)))
+
+;;;###autoload
 (defun other-emacs-eval-last-sexp (emacs &optional insert-value)
   "Evaluate sexp before point with EMACS; print value in the echo area.
 With prefix argument or INSERT-VALUE is non-nil, print value into

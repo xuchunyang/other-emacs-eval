@@ -14,6 +14,10 @@ emacs-version
 
 Evaluate `FORM` with `EMACS` and return its value.
 
+### `M-x other-emacs-eval-expression`
+
+Evaluate `EXP` with `EMACS`; print value in the echo area.
+
 ### `M-x other-emacs-eval-last-sexp`
 
 Evaluate sexp before point with `EMACS`; print value in the echo area.
