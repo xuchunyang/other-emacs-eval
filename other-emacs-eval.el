@@ -4,7 +4,7 @@
 
 ;; Author: Xu Chunyang <mail@xuchunyang.me>
 ;; Homepage: https://github.com/xuchunyang/other-emacs-eval
-;; Package-Requires: ((emacs "24.4") (async "1.9.2"))
+;; Package-Requires: ((emacs "25.1") (async "1.9.2"))
 ;; Keywords: tools
 ;; Created: Thu, 29 Mar 2018 17:28:30 +0800
 
@@ -29,6 +29,7 @@
 
 (require 'async)
 
+;;;###autoload
 (defun other-emacs-eval (form &optional emacs)
   "Evaluate FORM with EMACS and return its value.
 If EMACS is omitted or nil, the same Emacs as this one will be
@@ -42,6 +43,18 @@ absolute file name) of an Emacs."
                 (invocation-name (file-name-nondirectory path)))
             (async-get (async-start (lambda () (eval form)))))
         (user-error "Emacs not found: %s" emacs)))))
+
+(defun other-emacs-eval-read-emacs ()
+  (read-shell-command "Emacs: " "emacs"))
+
+;;;###autoload
+(defun other-emacs-eval-last-sexp (emacs &optional insert-value)
+  "Evaluate sexp before point with EMACS and print value in the echo area.
+With prefix argument or INSERT-VALUE is non-nil, insert value at point."
+  (interactive (list (other-emacs-eval-read-emacs)
+                     current-prefix-arg))
+  (let ((value (other-emacs-eval (elisp--preceding-sexp) emacs)))
+    (prin1 value (if insert-value (current-buffer) t))))
 
 (provide 'other-emacs-eval)
 ;;; other-emacs-eval.el ends here
