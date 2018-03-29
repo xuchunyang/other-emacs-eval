@@ -28,3 +28,8 @@ Evaluate sexp before point with `EMACS`; print value into current buffer.
 ### `M-x other-emacs-eval-region`
 
 Evaluate Emacs Lisp code in the region with `EMACS`.
+
+## Requirements
+
+- Emacs 25.1
+- async.el
