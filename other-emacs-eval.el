@@ -66,5 +66,14 @@ current buffer."
     (other-emacs-eval-last-sexp emacs t)
     (terpri)))
 
+;;;###autoload
+(defun other-emacs-eval-region (start end emacs)
+  "Evaluate Emacs Lisp code in the region with EMACS."
+  (interactive (list (region-beginning)
+                     (region-end)
+                     (other-emacs-eval-read-emacs)))
+  (let ((form (read (concat "(progn " (buffer-substring-no-properties start end) ")"))))
+    (prin1 (other-emacs-eval form emacs))))
+
 (provide 'other-emacs-eval)
 ;;; other-emacs-eval.el ends here
