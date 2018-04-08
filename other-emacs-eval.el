@@ -37,6 +37,7 @@
 
 ;;; Code:
 
+(require 'subr-x)                       ; `string-trim'
 (require 'async)
 
 ;;;###autoload
@@ -55,7 +56,7 @@ absolute file name) of an Emacs."
         (user-error "Emacs not found: %s" emacs)))))
 
 (defun other-emacs-eval-read-emacs ()
-  (read-shell-command "Emacs: " "emacs"))
+  (string-trim (read-shell-command "Emacs: " "emacs")))
 
 ;;;###autoload
 (defun other-emacs-eval-expression (emacs exp)
