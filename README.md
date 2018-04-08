@@ -1,5 +1,7 @@
 # other-emacs-eval.el -- Evaluate the Emacs Lisp expression in other Emacs
 
+[![Melpa](https://melpa.org/packages/other-emacs-eval-badge.svg)](https://melpa.org/#/other-emacs-eval)
+
 ``` emacs-lisp
 emacs-version
 ;; => "27.0.50"
